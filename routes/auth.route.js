@@ -5,7 +5,7 @@ import {body} from 'express-validator';
 const router = express.Router();
 
 router.post ("/register",[
-    body('email', "formato de email incorrecto").isEmail().normalizeEmail()
+    body('email', "formato de email incorrecto").trim().isEmail().normalizeEmail()
 ], register);
 router.post ("/login", login);  
 

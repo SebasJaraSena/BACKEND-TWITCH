@@ -5,8 +5,8 @@ export const register = (req, res)=>{
     const errors =validationResult(req);
 
     if(!errors.isEmpty()){
-        return res.status (400).json({errors: errors.array});
-        return res.send(`Hello, ${req.query.person}!`);
+        return res.status (400).json({errors: errors.array()});
+        
     }
 
 
