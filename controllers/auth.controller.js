@@ -5,16 +5,20 @@ export const register = async(req, res)=>{
     //viene con todas las validaciones
      const {email, password}= req.body
      try{
-        
-        const user = new User({email, password})
-        await user.save()
-        
+        //alternativa uno
+         /* let user = new User({email, password}) */
+
+
         //alternativa dos
+        let user = await User.findOne({email})
+        if(user) throw {code: 11000};
+
+            user = new User({email, password})
+            await user.save()
+        
 
 
         //jwt token 
-
-
         return res.json({ok: true})
     }catch(error){
         console.log(error.code);

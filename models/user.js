@@ -32,7 +32,7 @@ usershema.pre("save", async function(next){
     next()
  }catch(error){
     console.log(error) 
-    throw new erro 
+    throw new error("fallo el hash de contraseña");
  }
 })
 
