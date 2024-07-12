@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const {Schema, model} = mongoose;
 
 
-const usershema = new mongoose.Schema({
+const userShema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
@@ -18,7 +18,7 @@ const usershema = new mongoose.Schema({
     },
 });
 
-usershema.pre("save", async function(next){
+userShema.pre("save", async function(next){
     //hace el llamado al schema del user
     const user = this 
 
@@ -35,5 +35,8 @@ usershema.pre("save", async function(next){
     throw new error("fallo el hash de contraseña");
  }
 })
+userShema.methods.comparePassword = async function(candidatePassword){
+    return await bcryptjs.compare(candidatePassword, this.password)
+}
 
-export const User = mongoose.model('User',usershema)
+export const User = mongoose.model('User',userShema)
